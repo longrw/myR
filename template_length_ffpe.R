@@ -1,0 +1,16 @@
+args=commandArgs(TRUE)
+png(args[2], width=960, height=480, units="px")
+par(mfrow=c(1,1))
+
+dna_tempLen <- read.table(args[1])
+dna_tempLen <- abs(dna_tempLen)
+tmp <- table(dna_tempLen)
+var1 <- as.numeric(dimnames(tmp)$dna_tempLen)
+dna_y <- as.numeric(tmp[var1>0 & var1<=1000])
+m <- length(dna_y)
+dna_x <- (0:(m-1))
+dna <- cbind(dna_x, dna_y)
+plot(dna, xlab="template length", ylab="template number", cex.lab=1, font.lab=2, type="l", col="red", lwd=2, xaxt="n", cex.axis=0.9)
+axis(1, at=seq(0,m,50), cex.axis=0.9)
+
+dev.off()
